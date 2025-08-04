@@ -8,25 +8,29 @@ SELECT
 FROM film
 ORDER BY title ASC;
 ```
-Corroboración del resultado
+Validación de datos - Coincidencia de cantidad de películas obtenidas con la cantidad de film_id de la tabla.
 
 ```sql
 SELECT
-	COUNT(DISTINCT film_id)
+	COUNT(film_id)
 FROM film;
 ```
 
-### 2️⃣ Listar los títulos de las películas, junto con la cantidad de veces que fueron alquiladas.
+### 2️⃣ Mostrar el nombre y apellido de todos los clientes registrados.
+
+```sql
+SELECT 
+	customer.first_name,
+    customer.last_name
+FROM customer
+ORDER BY 1;
+```
+Validación de datos - Coincidencia de cantidad de nombres de clientes obtenidos con la cantidad de customer_id de la tabla.
 
 ```sql
 SELECT
-	film.title AS pelicula,
-    COUNT(rental.rental_id) AS cant_alquileres
-FROM film
-INNER JOIN inventory ON film.film_id = inventory.film_id
-INNER JOIN rental ON inventory.inventory_id = rental.inventory_id
-GROUP BY pelicula
-ORDER BY cant_alquileres DESC;
+	COUNT(customer_id)
+FROM customer;
 ```
 
 ### 3️⃣ Mostrar para cada categoría de película:
