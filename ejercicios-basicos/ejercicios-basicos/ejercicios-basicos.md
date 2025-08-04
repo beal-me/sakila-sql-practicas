@@ -33,39 +33,22 @@ SELECT
 FROM customer;
 ```
 
-### 3️⃣ Mostrar para cada categoría de película:
-
-* nombre de la categoría
-* cantidad total de películas en esa categoría
-* cantidad de películas disponibles actualmente (inventory disponible)
+### 3️⃣ Obtener los títulos de las películas que duran más de 120 minutos.
 
 ```sql
-WITH stock_no_disp AS (
-  SELECT
-    category.name AS categoria,
-    COUNT(DISTINCT inventory.inventory_id) AS pelis_no_disponibles
-  FROM category
-  INNER JOIN film_category ON category.category_id = film_category.category_id
-  INNER JOIN inventory ON film_category.film_id = inventory.film_id
-  INNER JOIN rental ON inventory.inventory_id = rental.inventory_id
-  WHERE rental.return_date IS NULL
-  GROUP BY category.name
-),
-stock AS (
-  SELECT
-    category.name AS categoria,
-    COUNT(DISTINCT inventory.inventory_id) AS inv_pelis
-  FROM category
-  INNER JOIN film_category ON category.category_id = film_category.category_id
-  INNER JOIN inventory ON film_category.film_id = inventory.film_id
-  GROUP BY category.name
-)
 SELECT
-  stock.categoria AS categorias,
-  stock.inv_pelis,
-  stock.inv_pelis - COALESCE(stock_no_disp.pelis_no_disponibles, 0) AS pelis_disponibles
-FROM stock
-LEFT JOIN stock_no_disp ON stock.categoria = stock_no_disp.categoria;
+	film.title
+FROM film
+WHERE film.length >= 120
+ORDER BY film.title;
+```
+Validación de datos - Coincidencia de cantidad de títulos de películas obtenidos con la cantidad de filas de duración >= 120.
+
+```sql
+SELECT 
+	COUNT(film.length)
+FROM film
+WHERE film.length >= 120;
 ```
 
 ### 4️⃣ Listar los actores que trabajaron en más de 25 películas. Mostrar su nombre, apellido y cantidad.
