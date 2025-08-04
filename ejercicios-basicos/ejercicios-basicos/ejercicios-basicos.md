@@ -8,11 +8,11 @@ SELECT
 FROM film
 ORDER BY title ASC;
 ```
-Validación de datos - Coincidencia de cantidad de películas obtenidas con la cantidad de film_id de la tabla.
+Consulta para validar cantidad total de películas.
 
 ```sql
 SELECT
-	COUNT(film_id)
+	COUNT(film_id) AS total_peliculas
 FROM film;
 ```
 
@@ -21,15 +21,16 @@ FROM film;
 ```sql
 SELECT 
 	customer.first_name,
-    customer.last_name
+	customer.last_name
 FROM customer
-ORDER BY 1;
+ORDER BY last_name, first_name;
 ```
-Validación de datos - Coincidencia de cantidad de nombres de clientes obtenidos con la cantidad de customer_id de la tabla.
+Consulta para validar cantidad total de clientes:
+Esta consulta cuenta el total de clientes registrados para comparar con la cantidad de filas obtenidas.
 
 ```sql
 SELECT
-	COUNT(customer_id)
+	COUNT(customer_id) AS total_clientes
 FROM customer;
 ```
 
