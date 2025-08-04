@@ -8,6 +8,13 @@ SELECT
 FROM film
 ORDER BY title ASC;
 ```
+Corroboración del resultado
+
+```sql
+SELECT
+	COUNT(DISTINCT film_id)
+FROM film;
+```
 
 ### 2️⃣ Listar los títulos de las películas, junto con la cantidad de veces que fueron alquiladas.
 
