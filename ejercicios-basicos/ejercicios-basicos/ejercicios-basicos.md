@@ -1,16 +1,12 @@
 ## /ejercicios-basicos/
 
-### 1️⃣ Mostrar los nombres de los clientes y el total de dinero que pagaron. Ordenar de mayor a menor total.
+### 1️⃣  Listar los nombres de todas las películas disponibles.
 
 ```sql
 SELECT
-	customer.first_name AS nombre,
-    customer.last_name AS apellido,
-    SUM(payment.amount) AS total_pagado
-FROM customer
-INNER JOIN payment ON customer.customer_id = payment.customer_id
-GROUP BY nombre, apellido
-ORDER BY total_pagado DESC;
+	film.title
+FROM film
+ORDER BY title ASC;
 ```
 
 ### 2️⃣ Listar los títulos de las películas, junto con la cantidad de veces que fueron alquiladas.
