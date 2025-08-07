@@ -6,9 +6,9 @@ Tanda de 10 ejercicios SQL — Nivel Intermedio (base de datos Sakila)
 
 ```sql
 SELECT 
-    customer.first_name AS nombre, 
-    customer.last_name AS apellido, 
-    city.city AS ciudad
+    	customer.first_name AS nombre, 
+    	customer.last_name AS apellido, 
+    	city.city AS ciudad
 FROM customer
 INNER JOIN address ON customer.address_id=address.address_id
 INNER JOIN city ON city.city_id=address.city_id
@@ -27,9 +27,9 @@ FROM customer;
 
 ```sql
 SELECT 
-    actor.first_name AS nombre, 
-    actor.last_name AS apellido, 
-    film.title AS pelicula
+    	actor.first_name AS nombre, 
+    	actor.last_name AS apellido, 
+    	film.title AS pelicula
 FROM actor
 INNER JOIN film_actor ON actor.actor_id=film_actor.actor_id
 INNER JOIN film ON film.film_id=film_actor.film_id
@@ -40,8 +40,8 @@ ORDER BY actor.last_name, actor.first_name;
 
 ```sql
 SELECT 
-    film.title AS pelicula, 
-    category.name AS categoria
+    	film.title AS pelicula, 
+   	category.name AS categoria
 FROM film
 INNER JOIN film_category ON film.film_id=film_category.film_id
 INNER JOIN category ON film_category.category_id=category.category_id
@@ -64,9 +64,9 @@ ORDER BY cant_pelis DESC;
 
 ```sql
 SELECT DISTINCT
-	  customer.first_name AS nombre, 
-	  customer.last_name AS apellido, 
-    category.name AS categoria 
+	customer.first_name AS nombre, 
+	customer.last_name AS apellido, 
+	category.name AS categoria 
 FROM customer
 INNER JOIN payment ON customer.customer_id=payment.customer_id
 INNER JOIN rental ON payment.rental_id=rental.rental_id
@@ -82,9 +82,9 @@ ORDER BY apellido, nombre;
 
 ```sql
 SELECT
-	  customer.first_name AS nombre,
-    customer.last_name AS apellido,
-    COUNT(DISTINCT film.film_id) AS pelis_alquiladas
+	customer.first_name AS nombre,
+	customer.last_name AS apellido,
+    	COUNT(DISTINCT film.film_id) AS pelis_alquiladas
 FROM customer
 INNER JOIN payment ON customer.customer_id=payment.customer_id
 INNER JOIN rental ON payment.rental_id=rental.rental_id    
@@ -99,8 +99,8 @@ ORDER BY 3 DESC , 2, 1;
 
 ```sql
  SELECT  
-	  category.name AS categoria,
-    COUNT(DISTINCT inventory.inventory_id) AS cantidad_pelis
+	category.name AS categoria,
+	COUNT(DISTINCT inventory.inventory_id) AS cantidad_pelis
 FROM category
 INNER JOIN film_category ON category.category_id=film_category.category_id
 INNER JOIN film ON film_category.film_id=film.film_id
@@ -114,9 +114,9 @@ LIMIT 5;
 
 ```sql
 SELECT 
-	  customer.first_name AS nombre,
-    customer.last_name AS apellido,	
-    COUNT(payment.payment_id) AS cant_pagos
+	customer.first_name AS nombre,
+    	customer.last_name AS apellido,	
+    	COUNT(payment.payment_id) AS cant_pagos
 FROM customer 
 INNER JOIN payment ON customer.customer_id=payment.customer_id
 WHERE payment.amount > 5.00
@@ -129,9 +129,9 @@ ORDER BY cant_pagos DESC;
 
 ```sql
 SELECT
-	  actor.first_name AS nombre,
-    actor.last_name AS apellido,
-    COUNT(DISTINCT film_category.category_id) AS cantidad_categorias
+	actor.first_name AS nombre,
+    	actor.last_name AS apellido,
+    	COUNT(DISTINCT film_category.category_id) AS cantidad_categorias
 FROM actor
 INNER JOIN film_actor ON actor.actor_id=film_actor.actor_id
 INNER JOIN film ON film_actor.film_id=film.film_id
@@ -146,8 +146,8 @@ ORDER BY cantidad_categorias DESC;
 
 ```sql
 SELECT 
-	  city.city AS ciudad,
-    COUNT(DISTINCT customer.customer_id) AS cantidad_clientes
+	city.city AS ciudad,
+	COUNT(DISTINCT customer.customer_id) AS cantidad_clientes
 FROM city
 INNER JOIN address ON city.city_id=address.city_id
 INNER JOIN customer ON address.address_id=customer.address_id
