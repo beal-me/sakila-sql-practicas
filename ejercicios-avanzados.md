@@ -96,3 +96,30 @@ JOIN alq_por_pelicula ON categoria_alq.film_id=alq_por_pelicula.film_id
 GROUP BY categoria_alq.categoria
 ORDER BY categoria_alq.categoria;
 ```
+ - Se verificaron los datos haciendo el cálculo manual
+
+Cálculo de cantidad de alquileres por categoría de película:
+```sql
+SELECT
+	category.name AS categoria,
+	COUNT(rental.rental_id) AS cant_alquileres
+FROM category
+LEFT JOIN film_category ON category.category_id=film_category.category_id
+LEFT JOIN film ON film_category.film_id=film.film_id
+LEFT JOIN inventory ON film.film_id=inventory.film_id
+LEFT JOIN rental ON inventory.inventory_id=rental.inventory_id
+GROUP BY category.name
+ORDER BY category.name;
+```
+Cálculo cantidad de películas por categorías:
+```sql
+SELECT
+	COUNT(film.film_id) AS cant_peliculas,
+    category.name AS categoria
+FROM film
+LEFT JOIN film_category ON film.film_id=film_category.film_id
+LEFT JOIN category ON film_category.category_id=category.category_id
+GROUP BY category.name
+ORDER BY category.name;
+```
+
