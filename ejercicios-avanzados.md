@@ -69,4 +69,30 @@ HAVING MIN(DATE(rental.rental_date)) > '2006-01-01'
 ORDER BY primer_alquiler;
 ```
 
+4️⃣ Mostrar pomedio de alquileres por categoría de película.
 
+```sql
+WITH alq_por_pelicula AS (
+	SELECT
+		film.film_id,
+		COUNT(rental.rental_id) AS total_alquileres
+FROM film
+LEFT JOIN inventory ON film.film_id=inventory.film_id
+LEFT JOIN rental ON inventory.inventory_id=rental.inventory_id
+GROUP BY film.film_id),
+categoria_alq AS (
+	SELECT
+		film.film_id,
+        category.name AS categoria
+FROM film
+JOIN film_category ON film.film_id=film_category.film_id
+JOIN category ON film_category.category_id=category.category_id
+GROUP BY film.film_id, category.name)
+SELECT
+		categoria_alq.categoria AS categoria,
+        ROUND(AVG(alq_por_pelicula.total_alquileres)) AS promedio_alq
+FROM categoria_alq
+JOIN alq_por_pelicula ON categoria_alq.film_id=alq_por_pelicula.film_id
+GROUP BY categoria_alq.categoria
+ORDER BY categoria_alq.categoria;
+```
